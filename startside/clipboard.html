@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copy to Clipboard</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <input type="text" value="Text to be copied" id="myInput">
+    <button id="copyButton">Copy to Clipboard</button>
+
+    <script>
+        const copyButton = document.getElementById("copyButton");
+        const myInput = document.getElementById("myInput");
+
+        copyButton.addEventListener("click", function () {
+            myInput.select();
+            document.execCommand("copy");
+            myInput.setSelectionRange(0, 0);
+            copyButton.innerHTML = "Copied!";
+        });
+    </script>
+</body>
+</html>
