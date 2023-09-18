@@ -11,10 +11,10 @@ body {
 
 .widget {
     display: flex;
-    border: solid rgb(150, 150, 150) 6px;
+    border: solid rgb(110,89,136) 6px;
     border-radius: 10px;
-    background-color: white;
-    color: white;
+    background-color: #534f56;
+    color: #534f56;
     font-family: Dyuthi, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 5px;
     margin: 10px;
@@ -83,7 +83,7 @@ a {
     transition-duration: 0.4s;
     border-color: #433f3f;
     border-radius: 10px;
-    text-decoration-color: black;
+    text-decoration-color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -107,7 +107,7 @@ a {
     transition-duration: 0.4s;
     border-color: #433f3f;
     border-radius: 10px;
-    text-decoration-color: black;
+    text-decoration-color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
