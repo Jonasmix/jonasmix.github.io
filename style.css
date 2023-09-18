@@ -11,7 +11,7 @@ body {
 
 .widget {
     display: flex;
-    border: solid rgb(110,89,136) 6px;
+    border: solid #767272 6px;
     border-radius: 10px;
     background-color: #534f56;
     color: #534f56;
@@ -68,7 +68,7 @@ li {
 }
 
 a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
