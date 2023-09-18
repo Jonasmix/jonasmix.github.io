@@ -205,3 +205,27 @@ a:hover {
     overflow: hidden;
     text-align: center;
 }
+
+#myInput {
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: none;
+    color: rgb(150,150,150);
+    width: 3.7vw;
+    margin-bottom: 9px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#copybutton {
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: none;
+    color: rgb(150,150,150);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#copybutton:hover {
+    text-decoration: wavy white underline;
+}

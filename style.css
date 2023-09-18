@@ -1,5 +1,7 @@
 body {
-   background: ./IMG_2142.jpeg;
+   background-image: url(IMG_2142.jpeg);
+   background-size: cover;
+   background-repeat: no-repeat;
 }
 
 .background-element p {
@@ -8,7 +10,7 @@ body {
 }
 
 .widget {
-    display: block;
+    display: flex;
     border: solid rgb(150, 150, 150) 6px;
     border-radius: 10px;
     background-color: white;
@@ -17,7 +19,7 @@ body {
     padding: 5px;
     margin: 10px;
     font-size: 25px;
-   position: 75% 75%;
+    position: 75% 75%;
 }
 
 
@@ -38,6 +40,15 @@ body {
     width: auto;
     border: none;
 }
+
+.invis-widget {
+    color: transparent;
+    border-color: transparent;
+    background-color: transparent;
+    height: 12.5vw;
+    width: 20vw;
+}
+
 
 .image {
     border: none;
