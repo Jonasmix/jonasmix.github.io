@@ -79,13 +79,13 @@ body {
 
 .widget li {
     margin-bottom: 9px;
-    font-size: 14px;
+    font-size: 2vh;
     font-weight: bold;
 }
 
 .widget h2 {
     margin: 10px;
-    font-size: 17px;
+    font-size: 3vh;
 }
 
 a {
@@ -95,7 +95,7 @@ a {
 
 .video {
     color: rgb(255, 255, 255);
-    font-size: 15px;
+    font-size: 16px;
 }
 
 a:hover {
@@ -222,7 +222,7 @@ a:hover {
     border-color: transparent;
     text-decoration: none;
     color: rgb(150,150,150);
-    font-size: 14px;
+    font-size: 2vh;
     font-weight: bold;
 }
 
