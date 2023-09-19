@@ -172,6 +172,7 @@ a:hover {
 
 #searchbar {
     display: flex;
+    color: white;
 }
 
 #searchbar input {
@@ -185,6 +186,7 @@ a:hover {
     border-right: none;
     text-align: center;
     font-size: 17;
+    color: white;
 }
 
 #searchbar input:focus-visible {
