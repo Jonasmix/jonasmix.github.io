@@ -82,7 +82,7 @@ a {
 
 .klokkediv {
     transition-duration: 0.4s;
-    border-color: #433f3f;
+    border-color: #ffffff;
     border-radius: 10px;
     text-decoration-color: white;
     padding: 15px 32px;
@@ -97,11 +97,11 @@ a {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 27px;
 }
 
 .klokkediv:hover {
-    background-color: #433f3f;
+    background-color: #2b2834;
     color: white;
 }
 .startsidediv {
@@ -125,6 +125,6 @@ a {
 }
 
 .startsidediv:hover {
-    background-color: #433f3f;
+    background-color: #2b2834;
     color: white;
 }
