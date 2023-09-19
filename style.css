@@ -11,7 +11,7 @@ body {
 
 .widget {
     display: flex;
-    border: solid #666060 7px;
+    border: solid #666060 6px;
     border-radius: 10px;
     background-color: #7C7A80;
     color: white;
