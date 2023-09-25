@@ -26,21 +26,21 @@ const timeTider = {
 
 const timeFagU1 = {
     'søndag': ['HELG'],
-    mandag: ['Frokost', 'Norsk', '', 'Programmering', 'FRI', 'Matte', '', 'MAF', '', 'Samfunnsfag'],
-    tirsdag: ['Frokost', 'Gym', '', 'Naturfag', 'Mat', 'Norsk', '', 'KRLE'],
-    onsdag: ['Frokost', 'Engelsk', '', 'Norsk', 'Mat', 'Samfunnsfag'],
-    torsdag: ['Frokost', 'Matte', '', 'Engelsk', 'Mat', 'Timen Livet', '', 'MAF'],
-    fredag: ['Frokost', 'Matte', '', 'Mat og Helse', 'Mat', 'Mat og Helse', '', 'Mat og Helse'],
+    mandag: ['Frokost', 'Engelsk', '', 'Programmering', 'FRI', 'Matte', '', 'Fransk', '', 'Naturfag'],
+    tirsdag: ['Frokost', 'Uteskole', '', 'Uteskole', 'Uteskole', 'Uteskole', '', 'Uteskole', '', 'Uteskole'],
+    onsdag: ['Frokost', 'Samfunnsfag', '', 'Matte', 'FRI', 'Norsk'],
+    torsdag: ['Frokost', 'Naturfag', '', 'Norsk', 'FRI', 'Timen Livet', '', 'Fransk'],
+    fredag: ['Frokost', 'KRLE', '', 'Gym', 'FRI', 'Matte', '', 'Samfunnsfag'],
     'lørdag': ['HELG'],
 }
 
 const timeFagU2 = {
     'søndag': ['HELG'],
-    mandag: ['Frokost', 'Naturfag', '', 'Matte', 'FRI', 'Gym', '', 'MAF', '', 'Norsk'],
-    tirsdag: ['Frokost', 'Gym', '', 'Matte', 'FRI', 'Programmering', '', 'Programmering',],
-    onsdag: ['Frokost', 'Samfunn', '', 'KRLE', 'FRI', 'Norsk'],
-    torsdag: ['Frokost', 'Engelsk', '', 'Timen Livet', 'FRI', 'MAF', '', 'Natufag'],
-    fredag: ['Frokost', 'Uteskole', '', 'Uteskole', 'Uteskole', 'Uteskole', '', 'Uteskole'],
+    mandag: ['Frokost', 'Norsk', '', 'Kroppsøving', 'FRI', 'Matte', '', 'Fransk', '', 'KRLE'],
+    tirsdag: ['Frokost', 'Norsk', '', 'Samfunnsfag', 'FRI', 'Programmering', '', 'Programmering',],
+    onsdag: ['Frokost', 'Matte', '', 'Timen Livet', 'FRI', 'Engelsk'],
+    torsdag: ['Frokost', 'Norsk', '', 'Naturfag', 'FRI', 'Fransk', '', 'Engelsk'],
+    fredag: ['Frokost', 'Mat og Helse', '', 'Mat og Helse', 'FRI', 'Mat og Helse', '', 'Gym'],
     'lørdag': ['HELG'],
 }
 
