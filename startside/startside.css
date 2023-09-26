@@ -79,13 +79,13 @@ body {
 
 .widget li {
     margin-bottom: 9px;
-    font-size: 2vh;
+    font-size: 14px;
     font-weight: bold;
 }
 
 .widget h2 {
     margin: 10px;
-    font-size: 3vh;
+    font-size: 17px;
 }
 
 a {
@@ -224,7 +224,7 @@ a:hover {
     border-color: transparent;
     text-decoration: none;
     color: rgb(150,150,150);
-    font-size: 2vh;
+    font-size: 14px;
     font-weight: bold;
 }
 
