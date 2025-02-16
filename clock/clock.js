@@ -1,18 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.getElementById("dynamicTable").getElementsByTagName("tbody")[0];
+    const addRowBtn = document.getElementById("addRowBtn");
     const maxCharsPerLine = 50;
 
     tableBody.addEventListener("keydown", function (event) {
         let activeElement = document.activeElement;
         
         if (!activeElement || activeElement.tagName !== "TD") return;
-        
+
         let row = activeElement.parentElement;
         let lastRow = tableBody.rows[tableBody.rows.length - 1];
         let lastCell = lastRow.cells[lastRow.cells.length - 1];
 
-        // Legg til ny rad hvis Enter eller Tab trykkes i siste celle
-        if ((event.key === "Tab" || event.key === "Enter") && activeElement === lastCell) {
+        // Kun legg til ny rad hvis Tab trykkes i siste celle
+        if (event.key === "Tab" && activeElement === lastCell) {
             event.preventDefault();
             addNewRow();
         }
@@ -23,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cell.tagName === "TD") {
             autoWrapText(cell);
         }
+    });
+
+    addRowBtn.addEventListener("click", function () {
+        addNewRow();
     });
 
     function addNewRow() {
