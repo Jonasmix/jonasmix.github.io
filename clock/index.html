@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell med Tab-utvidelse</title>
+    <title>Tabell med utvidelse</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h2>Trykk TAB i siste celle for å legge til en ny rad</h2>
+    <h2>Trykk TAB i siste celle eller klikk på knappen for å legge til en ny rad</h2>
+
     <table id="dynamicTable">
         <thead>
             <tr>
-                <th>Tid</th>
-                <th>Hva?</th>
-                <th>Lys</th>
-                <th>Annen Kommentar</th>
+                <th>Kolonne 1</th>
+                <th>Kolonne 2</th>
+                <th>Kolonne 3</th>
+                <th>Kolonne 4</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,8 @@
             </tr>
         </tbody>
     </table>
+
+    <button id="addRowBtn">Legg til ny rad</button>
 
     <script src="script.js"></script>
 
