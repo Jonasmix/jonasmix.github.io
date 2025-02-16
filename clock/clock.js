@@ -1,7 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const tableBody = document.getElementById("dynamicTable").getElementsByTagName("tbody")[0];
+  const tableBody = document
+    .getElementById("dynamicTable")
+    .getElementsByTagName("tbody")[0];
   const addRowBtn = document.getElementById("addRowBtn");
+  const newTableBtn = document.getElementById("newTableBtn");
   const maxCharsPerLine = 50;
+
+  // Funksjon som lagrer tabellens innhold i localStorage
+  function saveTableData() {
+    localStorage.setItem("tableData", tableBody.innerHTML);
+  }
+
+  // Ved lasting av siden, les lagret data (hvis finnes)
+  if (localStorage.getItem("tableData")) {
+    tableBody.innerHTML = localStorage.getItem("tableData");
+  }
 
   // Legg til ny rad med Tab-tast i siste celle
   tableBody.addEventListener("keydown", function (event) {
@@ -17,9 +30,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Legg til ny rad ved å klikke på knappen
+  // Legg til ny rad ved klikk på knappen
   addRowBtn.addEventListener("click", function () {
     addNewRow();
+  });
+
+  // Knapp for å starte en ny tabell (tømmer lagret innhold)
+  newTableBtn.addEventListener("click", function () {
+    if (confirm("Er du sikker på at du vil slette den eksisterende tabellen?")) {
+      localStorage.removeItem("tableData");
+      tableBody.innerHTML = "";
+      addNewRow();
+    }
   });
 
   // Automatisk linjeskift i cellene etter 50 tegn
@@ -27,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cell = event.target;
     if (cell.tagName === "TD") {
       autoWrapText(cell);
+      saveTableData();
     }
   });
 
@@ -37,15 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
       cell.contentEditable = "true";
     }
     newRow.cells[0].focus();
+    saveTableData();
   }
 
   function autoWrapText(cell) {
-    // Fjern alle linjeskift for å få en "ren" tekststreng
+    // Fjerner alle linjeskift for å få en ren tekststreng
     const rawText = cell.innerText.replace(/\n/g, "");
     let newText = "";
     let pos = 0;
-
-    // Sett inn linjeskift for hver blokk med maxCharsPerLine tegn
     while (pos < rawText.length) {
       newText += rawText.substring(pos, pos + maxCharsPerLine);
       pos += maxCharsPerLine;
@@ -53,8 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
         newText += "\n";
       }
     }
-
-    // Oppdater kun hvis teksten har endret seg (for å unngå unødvendige oppdateringer)
     if (cell.innerText !== newText) {
       cell.innerText = newText;
       placeCursorAtEnd(cell);
