@@ -8,10 +8,11 @@ table {
     width: 60%;
     margin: auto;
     border-collapse: collapse;
+    border: 2px solid black; /* Tykk kant rundt hele tabellen */
 }
 
 th, td {
-    border: 1px solid #000;
+    border: 2px solid black; /* Tykk kant rundt hver celle */
     padding: 10px;
     text-align: left;
     min-width: 150px;
@@ -21,6 +22,28 @@ th, td {
     overflow-wrap: break-word;
 }
 
+/* Farger for hver kolonne */
+td:nth-child(1), th:nth-child(1) { background-color: #ffdddd; } /* Lys rød */
+td:nth-child(2), th:nth-child(2) { background-color: #ddffdd; } /* Lys grønn */
+td:nth-child(3), th:nth-child(3) { background-color: #ddddff; } /* Lys blå */
+td:nth-child(4), th:nth-child(4) { background-color: #ffffdd; } /* Lys gul */
+
 td {
     cursor: text;
+}
+
+/* Stil for knappen */
+button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
