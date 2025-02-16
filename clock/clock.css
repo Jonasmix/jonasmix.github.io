@@ -1,14 +1,8 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-}
-
 table {
   margin: auto;
   width: 80%;
   border-collapse: collapse;
-  border: 2px solid black; /* Tykk kant rundt hele tabellen */
+  border: 2px solid black; /* Kant rundt hele tabellen */
 }
 
 th, td {
@@ -16,26 +10,22 @@ th, td {
   padding: 10px;
   text-align: left;
   word-wrap: break-word;
-  white-space: pre-wrap; /* Bevarer linjeskift */
+  white-space: pre-wrap;
 }
 
-/* Bakgrunnsfarger per kolonne */
+/* Farger per kolonne */
 th:nth-child(1), td:nth-child(1) { background-color: #ffdddd; }
 th:nth-child(2), td:nth-child(2) { background-color: #ddffdd; }
 th:nth-child(3), td:nth-child(3) { background-color: #ddddff; }
 th:nth-child(4), td:nth-child(4) { background-color: #ffffdd; }
 
-button {
-  margin: 10px;
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Sørger for at kantene alltid er synlige */
+td {
+  border: 2px solid black;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Når en celle er aktiv */
+td:focus {
+  outline: none;
+  border: 2px solid blue; /* Marker aktiv celle */
 }
