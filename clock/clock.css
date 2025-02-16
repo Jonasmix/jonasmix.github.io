@@ -5,44 +5,35 @@ body {
 }
 
 table {
-  width: 60%;
   margin: auto;
   border-collapse: collapse;
+  width: 80%;
   border: 2px solid black; /* Tykk kant rundt hele tabellen */
 }
 
 th, td {
-  border: 2px solid black; /* Tykk kant rundt hver celle */
+  border: 2px solid black; /* Kant rundt hver celle */
   padding: 10px;
   text-align: left;
-  min-width: 150px;
-  max-width: 300px;
   word-wrap: break-word;
   white-space: pre-wrap; /* Bevarer linjeskift */
-  overflow-wrap: break-word;
 }
 
-/* Farger for hver kolonne */
-td:nth-child(1), th:nth-child(1) { background-color: #ffdddd; }
-td:nth-child(2), th:nth-child(2) { background-color: #ddffdd; }
-td:nth-child(3), th:nth-child(3) { background-color: #ddddff; }
-td:nth-child(4), th:nth-child(4) { background-color: #ffffdd; }
+/* Bakgrunnsfarger per kolonne */
+th:nth-child(1), td:nth-child(1) { background-color: #ffdddd; }
+th:nth-child(2), td:nth-child(2) { background-color: #ddffdd; }
+th:nth-child(3), td:nth-child(3) { background-color: #ddddff; }
+th:nth-child(4), td:nth-child(4) { background-color: #ffffdd; }
 
-td {
-  cursor: text;
-}
-
-/* Stil for knappene */
 button {
-  margin-top: 20px;
+  margin: 10px;
   padding: 10px 15px;
   font-size: 16px;
-  cursor: pointer;
   background-color: #007BFF;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  margin-right: 10px;
+  cursor: pointer;
 }
 
 button:hover {
