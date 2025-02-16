@@ -8,15 +8,15 @@ table {
   margin: auto;
   width: 80%;
   border-collapse: collapse;
-  border: 2px solid black;
+  border: 2px solid black; /* Tykk kant rundt hele tabellen */
 }
 
 th, td {
-  border: 2px solid black;
+  border: 2px solid black; /* Kant rundt hver celle */
   padding: 10px;
   text-align: left;
   word-wrap: break-word;
-  white-space: pre-wrap;
+  white-space: pre-wrap; /* Bevarer linjeskift */
 }
 
 /* Bakgrunnsfarger per kolonne */
