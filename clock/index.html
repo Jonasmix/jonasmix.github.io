@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabell med utvidelse</title>
+  <title>Tabell med utvidelse og lagring</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <h2>Trykk TAB i siste celle eller klikk på knappen for å legge til en ny rad</h2>
+  <h2>Trykk TAB i siste celle for å legge til ny rad, eller bruk knappene under</h2>
 
   <table id="dynamicTable">
     <thead>
       <tr>
-        <th>Tid</th>
+        <th>Kolonne 1</th>
         <th>Kolonne 2</th>
         <th>Kolonne 3</th>
         <th>Kolonne 4</th>
@@ -31,6 +31,8 @@
 
   <!-- Knapp for å legge til ny rad -->
   <button id="addRowBtn">Legg til ny rad</button>
+  <!-- Knapp for å starte en ny tabell (sletter lagret innhold) -->
+  <button id="newTableBtn">Ny tabell</button>
 
   <script src="script.js"></script>
 </body>
