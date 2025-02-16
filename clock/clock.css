@@ -32,7 +32,7 @@ td {
   cursor: text;
 }
 
-/* Stil for knappen */
+/* Stil for knappene */
 button {
   margin-top: 20px;
   padding: 10px 15px;
@@ -42,6 +42,7 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 button:hover {
