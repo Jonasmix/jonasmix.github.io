@@ -35,7 +35,7 @@
     }
     /* Første kolonne fet skrift */
     table th:first-child, table td:first-child {
-      width: 12ch;
+      width: 5ch;
       font-weight: bold;
     }
     textarea {
@@ -195,12 +195,34 @@
     }
 
     function handleTab(event) {
+      var currentCell = event.target;
+      var nextCell;
+
+      // Hvis Tab-tasten er trykket på
       if (event.key === "Tab") {
-        event.preventDefault();
-        leggTilRad();
+        event.preventDefault();  // Hindre standard handling
+        if (event.shiftKey) {
+          // Shift+Tab går til forrige celle
+          nextCell = currentCell.closest("td").previousElementSibling;
+          if (!nextCell) {
+            var prevRow = currentCell.closest("tr").previousElementSibling;
+            if (prevRow) nextCell = prevRow.cells[prevRow.cells.length - 1];
+          }
+        } else {
+          // Vanlig Tab går til neste celle
+          nextCell = currentCell.closest("td").nextElementSibling;
+          if (!nextCell) {
+            var nextRow = currentCell.closest("tr").nextElementSibling;
+            if (nextRow) nextCell = nextRow.cells[0];
+          }
+        }
+        
+        // Sett fokus til neste celle
+        if (nextCell) {
+          nextCell.querySelector("textarea").focus();
+        }
       }
     }
-
   </script>
 </body>
 </html>
