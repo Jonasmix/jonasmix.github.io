@@ -3,12 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabell med Rad- og Kolonneindikator</title>
+  <title>Responsiv Tabell med Dynamiske Funksjoner</title>
   <style>
+    /* Grunnleggende reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      padding: 10px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    /* Tabellen fyller bredden, men overskrider ikke enhetens størrelse */
     table {
-      width: 60%;
+      width: 100%;
       border-collapse: collapse;
-      margin: 20px auto;
+      margin: 0 auto;
     }
     th, td {
       border: 1px solid #333;
@@ -18,134 +34,137 @@
     th {
       background-color: #f2f2f2;
     }
-    input {
-      width: 90%;
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #ccc;
+    /* Bruk textarea for alle celler slik at du kan ha linjeskift (Enter) og tabulatorstyring */
+    textarea {
+      width: 100%;
+      /* Sett en fast høyde – du kan endre dette etter ønske */
+      height: 40px;
+      resize: none;
+      font-size: 14px;
+      font-family: inherit;
+      padding: 4px;
+      /* Sørger for at lange ord brytes, også uten mellomrom */
+      white-space: pre-wrap;
+      word-break: break-all;
     }
-    /* Organiser knappene horisontalt i to etasjer */
+    /* Knappene organiseres i to horisontale rader */
     .button-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 20px;
     }
-    .button-container button,
-    .button-container select {
+    .button-container > * {
       margin: 5px;
-      font-size: 16px;
       padding: 10px;
+      font-size: 16px;
     }
-    /* Indikatorstil for rad og kolonne */
+    /* Indikator for rad/kolonne */
     #indikator {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
+      background-color: rgba(0,0,0,0.7);
+      color: #fff;
       padding: 10px;
       border-radius: 5px;
       display: none;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea></th>
+          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea></th>
+          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea></th>
+          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+        </tr>
+        <tr>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+        </tr>
+        <tr>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
 
-  <table id="myTable">
-    <thead>
-      <tr>
-        <th><input type="text" value="Tittel 1" class="editable-title"></th>
-        <th><input type="text" value="Tittel 2" class="editable-title"></th>
-        <th><input type="text" value="Tittel 3" class="editable-title"></th>
-        <th><input type="text" value="Tittel 4" class="editable-title"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-      </tr>
-      <tr>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-      </tr>
-      <tr>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Indikator for rad og kolonne -->
+    <div id="indikator"></div>
 
-  <div id="indikator"></div>
-
-  <div class="button-container">
-    <!-- Første rad med knapper -->
-    <button onclick="leggTilRad()">Legg til ny rad</button>
-    <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
-    <button onclick="fjernValgtRad()">Fjern valgt rad</button>
-    <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
-
-    <!-- Andre rad med select-menyene -->
-    <select id="radValg" onchange="opprettRadValg()">
-      <option value="">Velg rad å fjerne</option>
-    </select>
-    <select id="kolonneValg" onchange="opprettKolonneValg()">
-      <option value="">Velg kolonne å fjerne</option>
-    </select>
+    <!-- Knappene, organisert i to rader (her med to select-elementer for å velge rad/kolonne til fjerning) -->
+    <div class="button-container">
+      <button onclick="leggTilRad()">Legg til ny rad (Tab)</button>
+      <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
+      <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+      <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+      <select id="radValg" onchange="fjernValgtRad()">
+        <option value="">Velg rad å fjerne</option>
+      </select>
+      <select id="kolonneValg" onchange="fjernValgtKolonne()">
+        <option value="">Velg kolonne å fjerne</option>
+      </select>
+    </div>
   </div>
 
   <script>
+    // Viser indikator med rad- og kolonneinformasjon når du holder musen over en celle
     function visIndikator(event) {
-      // Finn nærmeste td (dersom du holder musen over input, må vi gå opp til td)
       var cell = event.target.closest("td");
       if (!cell) return;
-      // Finn raden som inneholder cellen
       var row = cell.closest("tr");
-      // Bruk rowIndex og cellIndex (merk: rowIndex kan inkludere header, men det var slik det fungerte tidligere)
-      var radIndex = row.rowIndex;       // 0-basert
-      var colIndex = cell.cellIndex;     // 0-basert
-
+      var radIndex = row.rowIndex;  // 0-basert (inkludert header)
+      var colIndex = cell.cellIndex; // 0-basert
       var indikator = document.getElementById("indikator");
       indikator.style.display = "block";
-      // Vi legger til 1 for å vise rad/kolonne på en mer naturlig måte
+      // Legger til 1 for visning (brukervennlig 1-basert nummerering)
       indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1);
     }
 
+    // Legg til ny rad i tbody og sett fokus på første celle i den nye raden
     function leggTilRad() {
-      var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-      var newRow = tableBody.insertRow();
-      // Bruk antall celler fra første rad i tbody (forutsatt at det alltid er samme antall)
-      var cellCount = tableBody.rows[0].cells.length;
+      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+      var cellCount = tbody.rows[0].cells.length;
+      var newRow = tbody.insertRow();
       for (var i = 0; i < cellCount; i++) {
         var newCell = newRow.insertCell();
-        var input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Skriv her";
-        // Legg til onmouseover for den nye inputen
-        input.onmouseover = visIndikator;
-        newCell.appendChild(input);
+        var textarea = document.createElement("textarea");
+        textarea.placeholder = "Skriv her";
+        textarea.onmouseover = visIndikator;
+        textarea.onkeydown = handleTab;
+        newCell.appendChild(textarea);
       }
       oppdaterRadValg();
+      newRow.cells[0].querySelector("textarea").focus();
     }
 
+    // Legg til ny kolonne i alle rader (inkludert header)
     function leggTilKolonne() {
       var table = document.getElementById("myTable");
-      var rows = table.rows;
-      for (var i = 0; i < rows.length; i++) {
-        var newCell = rows[i].insertCell();
-        var input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Skriv her";
-        input.onmouseover = visIndikator;
-        newCell.appendChild(input);
-        // Hvis det er header-raden, sett bakgrunnsfarge lik header
+      for (var i = 0; i < table.rows.length; i++) {
+        var newCell = table.rows[i].insertCell();
+        var textarea = document.createElement("textarea");
+        textarea.placeholder = "Skriv her";
+        textarea.onmouseover = visIndikator;
+        textarea.onkeydown = handleTab;
+        newCell.appendChild(textarea);
         if (i === 0) {
           newCell.style.backgroundColor = "#f2f2f2";
         }
@@ -153,31 +172,35 @@
       oppdaterKolonneValg();
     }
 
+    // Fjerner valgt rad basert på select-menyen
     function fjernValgtRad() {
-      var radValg = document.getElementById("radValg").value;
-      if (radValg !== "") {
-        var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-        tableBody.deleteRow(radValg);
+      var radSelect = document.getElementById("radValg");
+      var index = radSelect.value;
+      if (index !== "") {
+        var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+        tbody.deleteRow(index);
         oppdaterRadValg();
       }
     }
 
+    // Fjerner valgt kolonne basert på select-menyen
     function fjernValgtKolonne() {
-      var kolonneValg = document.getElementById("kolonneValg").value;
-      if (kolonneValg !== "") {
+      var kolonneSelect = document.getElementById("kolonneValg");
+      var index = kolonneSelect.value;
+      if (index !== "") {
         var table = document.getElementById("myTable");
         for (var i = 0; i < table.rows.length; i++) {
-          table.rows[i].deleteCell(kolonneValg);
+          table.rows[i].deleteCell(index);
         }
         oppdaterKolonneValg();
       }
     }
 
     function oppdaterRadValg() {
-      var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
       var radSelect = document.getElementById("radValg");
       radSelect.innerHTML = '<option value="">Velg rad å fjerne</option>';
-      for (var i = 0; i < tableBody.rows.length; i++) {
+      for (var i = 0; i < tbody.rows.length; i++) {
         var option = document.createElement("option");
         option.value = i;
         option.text = "Rad " + (i + 1);
@@ -198,10 +221,22 @@
       }
     }
 
-    // Oppdater valgmenyer ved oppstart
+    // Når Tab trykkes i en celle, hindrer vi standardatferden og legger til en ny rad
+    function handleTab(event) {
+      if (event.key === "Tab") {
+        event.preventDefault();
+        leggTilRad();
+      }
+    }
+
+    // For header-celler lar vi Enter og Tab ha standardatferd (slik at du kan redigere overskriftene)
+    function handleHeaderKeyDown(event) {
+      // Her kan du legge til eventuelle spesielle regler for headeren om ønskelig
+    }
+
+    // Oppdater select-menyene ved oppstart
     oppdaterRadValg();
     oppdaterKolonneValg();
   </script>
-
 </body>
 </html>
