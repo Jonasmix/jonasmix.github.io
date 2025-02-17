@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interaktiv Tabell</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Tabell 4x3</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Interaktiv Tabell</h1>
-    <button onclick="addRow()">Legg til rad</button>
-    <button onclick="addColumn()">Legg til kolonne</button>
-    <input type="color" id="colorPicker" onchange="changeCellColor()" />
-    
-    <table id="editableTable">
-        <tbody id="tableBody">
-            <tr>
-                <td contenteditable="true" onclick="selectCell(event)"></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <table>
+        <thead>
+            <tr>
+                <th>Tittel 1</th>
+                <th>Tittel 2</th>
+                <th>Tittel 3</th>
+                <th>Tittel 4</th>
+            </tr>
+        </thead>
+        <tbody>
+           
