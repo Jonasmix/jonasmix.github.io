@@ -1,290 +1,163 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsiv Tabell med Ekstra Kolonne</title>
-  <style>
-    /* Grunnleggende reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: sans-serif;
-      padding: 10px;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 10px;
-    }
-    /* Tabellen fyller bredden */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0 auto;
-    }
-    th, td {
-      border: 1px solid #333;
-      padding: 8px;
-      text-align: center;
-      vertical-align: top;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    /* Sett bredden på den første kolonnen til ca. 5 tegn */
-    table th:first-child, table td:first-child {
-      width: 15ch;
-    }
-    /* Bruk textarea for celler slik at de auto-resizer */
-    textarea {
-      width: 100%;
-      min-height: 40px;
-      resize: none;
-      font-size: 14px;
-      font-family: inherit;
-      padding: 4px;
-      white-space: pre-wrap;
-      word-break: break-all;
-      overflow: hidden;
-    }
-    /* Organiser knappene i to rader */
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .button-container > * {
-      margin: 5px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    /* Indikator for rad og kolonne */
-    #indikator {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
-      z-index: 1000;
-    }
-  </style>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamisk Tabell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            max-width: 100vw;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            word-break: break-word; /* Gjør at lange ord brytes */
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        table th:first-child, table td:first-child {
+            font-weight: bold;
+            width: 5ch; /* Holder første kolonne på ca. 5 tegns bredde */
+        }
+        td {
+            min-width: 100px; /* Forhindrer for smale celler */
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .coordinates {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <table id="myTable">
-      <thead>
-        <tr>
-          <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea>
-          </th>
-          <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea>
-          </th>
-          <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea>
-          </th>
-          <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea>
-          </th>
-          <!-- Ekstra standard kolonne -->
-          <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 5</textarea>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <!-- Ekstra kolonne i hver rad -->
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-        </tr>
-        <!-- Gjenta for så mange rader du ønsker -->
-        <tr>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-        </tr>
-        <!-- Du kan legge til flere rader her -->
-      </tbody>
+
+    <table id="dynamicTable">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Tittel 1</th>
+                <th>Tittel 2</th>
+                <th>Tittel 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+        </tbody>
     </table>
 
-    <!-- Indikator for rad og kolonne -->
-    <div id="indikator"></div>
-
-    <!-- Knappene, organisert i to rader -->
     <div class="button-container">
-      <button onclick="leggTilRad()">Legg til ny rad (Tab)</button>
-      <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
-      <button onclick="fjernValgtRad()">Fjern valgt rad</button>
-      <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
-      <select id="radValg" onchange="fjernValgtRad()">
-        <option value="">Velg rad å fjerne</option>
-      </select>
-      <select id="kolonneValg" onchange="fjernValgtKolonne()">
-        <option value="">Velg kolonne å fjerne</option>
-      </select>
+        <button onclick="addRow()">Legg til rad</button>
+        <button onclick="addColumn()">Legg til kolonne</button>
+        <button onclick="removeRow()">Fjern rad</button>
+        <button onclick="removeColumn()">Fjern kolonne</button>
     </div>
-  </div>
 
-  <script>
-    // Auto-resize for textarea
-    function autoResize(textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = textarea.scrollHeight + "px";
-    }
+    <div class="coordinates" id="coordinates"></div>
 
-    // Viser indikator med rad- og kolonneinformasjon når musen er over en celle
-    function visIndikator(event) {
-      var cell = event.target.closest("td");
-      if (!cell) return;
-      var row = cell.closest("tr");
-      var radIndex = row.rowIndex;  // 0-basert (inkludert header)
-      var colIndex = cell.cellIndex; // 0-basert
-      var indikator = document.getElementById("indikator");
-      indikator.style.display = "block";
-      indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1);
-    }
+    <script>
+        function addRow() {
+            let table = document.getElementById("dynamicTable").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            let columnCount = document.getElementById("dynamicTable").rows[0].cells.length;
 
-    // Skjul indikator når musen forlater tabellen
-    document.getElementById("myTable").addEventListener("mouseleave", function() {
-      document.getElementById("indikator").style.display = "none";
-    });
-
-    // Legg til ny rad i tbody og sett fokus på den nye radens første celle
-    function leggTilRad() {
-      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-      var cellCount = tbody.rows[0].cells.length;
-      var newRow = tbody.insertRow();
-      for (var i = 0; i < cellCount; i++) {
-        var newCell = newRow.insertCell();
-        var textarea = document.createElement("textarea");
-        textarea.placeholder = "Skriv her";
-        textarea.oninput = function() { autoResize(this); };
-        textarea.onmouseover = visIndikator;
-        textarea.onkeydown = handleTab;
-        newCell.appendChild(textarea);
-      }
-      oppdaterRadValg();
-      newRow.cells[0].querySelector("textarea").focus();
-    }
-
-    // Legg til ny kolonne i alle rader (inkludert header)
-    function leggTilKolonne() {
-      var table = document.getElementById("myTable");
-      for (var i = 0; i < table.rows.length; i++) {
-        var newCell = table.rows[i].insertCell();
-        var textarea = document.createElement("textarea");
-        textarea.placeholder = "Skriv her";
-        textarea.oninput = function() { autoResize(this); };
-        textarea.onmouseover = visIndikator;
-        textarea.onkeydown = handleTab;
-        newCell.appendChild(textarea);
-        if (i === 0) {
-          newCell.style.backgroundColor = "#f2f2f2";
+            for (let i = 0; i < columnCount; i++) {
+                let cell = newRow.insertCell(i);
+                if (i === 0) {
+                    cell.textContent = table.rows.length; // Oppdaterer radnummer
+                    cell.style.fontWeight = "bold";
+                } else {
+                    cell.contentEditable = "true";
+                }
+            }
         }
-      }
-      oppdaterKolonneValg();
-    }
 
-    // Fjern valgt rad basert på select-menyen
-    function fjernValgtRad() {
-      var radSelect = document.getElementById("radValg");
-      var index = radSelect.value;
-      if (index !== "") {
-        var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-        tbody.deleteRow(index);
-        oppdaterRadValg();
-      }
-    }
+        function addColumn() {
+            let table = document.getElementById("dynamicTable");
+            let headerRow = table.rows[0];
+            let newColumnIndex = headerRow.cells.length;
 
-    // Fjern valgt kolonne basert på select-menyen
-    function fjernValgtKolonne() {
-      var kolonneSelect = document.getElementById("kolonneValg");
-      var index = kolonneSelect.value;
-      if (index !== "") {
-        var table = document.getElementById("myTable");
-        for (var i = 0; i < table.rows.length; i++) {
-          table.rows[i].deleteCell(index);
+            let newHeader = document.createElement("th");
+            newHeader.textContent = "Tittel " + newColumnIndex;
+            newHeader.contentEditable = "true";
+            newHeader.style.backgroundColor = "#f2f2f2";
+            newHeader.style.fontWeight = "bold";
+            headerRow.appendChild(newHeader);
+
+            for (let i = 1; i < table.rows.length; i++) {
+                let newCell = table.rows[i].insertCell();
+                newCell.contentEditable = "true";
+            }
         }
-        oppdaterKolonneValg();
-      }
-    }
 
-    function oppdaterRadValg() {
-      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-      var radSelect = document.getElementById("radValg");
-      radSelect.innerHTML = '<option value="">Velg rad å fjerne</option>';
-      for (var i = 0; i < tbody.rows.length; i++) {
-        var option = document.createElement("option");
-        option.value = i;
-        option.text = "Rad " + (i + 1);
-        radSelect.appendChild(option);
-      }
-    }
+        function removeRow() {
+            let table = document.getElementById("dynamicTable");
+            if (table.rows.length > 2) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        }
 
-    function oppdaterKolonneValg() {
-      var table = document.getElementById("myTable");
-      var kolonneSelect = document.getElementById("kolonneValg");
-      kolonneSelect.innerHTML = '<option value="">Velg kolonne å fjerne</option>';
-      var columns = table.rows[0].cells.length;
-      for (var i = 0; i < columns; i++) {
-        var option = document.createElement("option");
-        option.value = i;
-        option.text = "Kolonne " + (i + 1);
-        kolonneSelect.appendChild(option);
-      }
-    }
+        function removeColumn() {
+            let table = document.getElementById("dynamicTable");
+            let columnCount = table.rows[0].cells.length;
 
-    // Når Tab trykkes i en celle, hindrer vi standardatferden og legger til en ny rad
-    function handleTab(event) {
-      if (event.key === "Tab") {
-        event.preventDefault();
-        leggTilRad();
-      }
-    }
+            if (columnCount > 2) {
+                for (let i = 0; i < table.rows.length; i++) {
+                    table.rows[i].deleteCell(columnCount - 1);
+                }
+            }
+        }
 
-    // For header-celler lar vi Enter og Tab ha standardatferd
-    function handleHeaderKeyDown(event) {
-      // Eventuelle regler for header kan legges her
-    }
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Tab") {
+                event.preventDefault();
+                addRow();
+            }
+        });
 
-    // Oppdater select-menyene ved oppstart
-    oppdaterRadValg();
-    oppdaterKolonneValg();
-  </script>
+        document.addEventListener("mouseover", function(event) {
+            let target = event.target;
+            let coordinates = document.getElementById("coordinates");
+
+            if (target.tagName === "TD" || target.tagName === "TH") {
+                let row = target.parentElement.rowIndex + 1;
+                let column = target.cellIndex + 1;
+                coordinates.style.display = "block";
+                coordinates.textContent = `Rad: ${row}, Kolonne: ${column}`;
+                coordinates.style.top = (event.clientY + 10) + "px";
+                coordinates.style.left = (event.clientX + 10) + "px";
+            } else {
+                coordinates.style.display = "none";
+            }
+        });
+    </script>
+
 </body>
 </html>
