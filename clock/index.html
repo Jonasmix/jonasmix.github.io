@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell med Input og Legg til Rader</title>
+    <title>Tabell med Redigeringsmuligheter</title>
     <style>
         table {
             width: 60%;
@@ -26,10 +26,15 @@
         }
         button {
             display: block;
-            margin: 20px auto;
+            margin: 10px auto;
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
+        }
+        select {
+            margin: 10px auto;
+            display: block;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -67,20 +72,96 @@
     </table>
 
     <button onclick="leggTilRad()">Legg til ny rad</button>
+    <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
+    <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+    <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+
+    <select id="radValg" onchange="opprettRadValg()">
+        <option value="">Velg rad å fjerne</option>
+    </select>
+    <select id="kolonneValg" onchange="opprettKolonneValg()">
+        <option value="">Velg kolonne å fjerne</option>
+    </select>
 
     <script>
         function leggTilRad() {
             var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.rows.length);
-
-            for (var i = 0; i < 4; i++) {
+            
+            for (var i = 0; i < table.rows[0].cells.length; i++) {
                 var newCell = newRow.insertCell(i);
                 var input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = "Skriv her";
                 newCell.appendChild(input);
             }
+
+            oppdaterRadValg();
         }
+
+        function leggTilKolonne() {
+            var table = document.getElementById("myTable");
+            var rows = table.rows;
+            
+            for (var i = 0; i < rows.length; i++) {
+                var newCell = rows[i].insertCell(rows[i].cells.length);
+                var input = document.createElement("input");
+                input.type = "text";
+                input.placeholder = "Skriv her";
+                newCell.appendChild(input);
+            }
+
+            oppdaterKolonneValg();
+        }
+
+        function fjernValgtRad() {
+            var radValg = document.getElementById("radValg").value;
+            if (radValg) {
+                var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+                table.deleteRow(radValg);
+                oppdaterRadValg();
+            }
+        }
+
+        function fjernValgtKolonne() {
+            var kolonneValg = document.getElementById("kolonneValg").value;
+            if (kolonneValg) {
+                var table = document.getElementById("myTable");
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].deleteCell(kolonneValg);
+                }
+                oppdaterKolonneValg();
+            }
+        }
+
+        function oppdaterRadValg() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+            var radSelect = document.getElementById("radValg");
+            radSelect.innerHTML = '<option value="">Velg rad å fjerne</option>';
+            for (var i = 0; i < table.rows.length; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = "Rad " + (i + 1);
+                radSelect.appendChild(option);
+            }
+        }
+
+        function oppdaterKolonneValg() {
+            var table = document.getElementById("myTable");
+            var kolonneSelect = document.getElementById("kolonneValg");
+            kolonneSelect.innerHTML = '<option value="">Velg kolonne å fjerne</option>';
+            var columns = table.rows[0].cells.length;
+            for (var i = 0; i < columns; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = "Kolonne " + (i + 1);
+                kolonneSelect.appendChild(option);
+            }
+        }
+
+        // Initialiser valgene for rad og kolonne ved oppstart
+        oppdaterRadValg();
+        oppdaterKolonneValg();
     </script>
 
 </body>
