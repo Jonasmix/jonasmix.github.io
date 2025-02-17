@@ -1,31 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
 table {
-  margin: auto;
-  width: 80%;
-  border-collapse: collapse;
-  border: 2px solid black; /* Kant rundt hele tabellen */
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
 }
 
-th, td {
-  border: 2px solid black; /* Kant rundt hver celle */
-  padding: 10px;
-  text-align: left;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-
-/* Farger per kolonne */
-th:nth-child(1), td:nth-child(1) { background-color: #ffdddd; }
-th:nth-child(2), td:nth-child(2) { background-color: #ddffdd; }
-th:nth-child(3), td:nth-child(3) { background-color: #ddddff; }
-th:nth-child(4), td:nth-child(4) { background-color: #ffffdd; }
-
-/* Sørger for at kantene alltid er synlige */
 td {
-  border: 2px solid black;
+    width: 100px;
+    height: 40px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
 }
 
-/* Når en celle er aktiv */
-td:focus {
-  outline: none;
-  border: 2px solid blue; /* Marker aktiv celle */
+button, input {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
