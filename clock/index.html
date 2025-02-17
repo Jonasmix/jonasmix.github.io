@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsiv Tabell med Auto-Resize Celler</title>
+  <title>Responsiv Tabell med Auto-Resize Celler og Koordinatindikator</title>
   <style>
     /* Grunnleggende reset */
     * {
@@ -35,7 +35,7 @@
     th {
       background-color: #f2f2f2;
     }
-    /* Bruk textarea for alle celler slik at de kan auto-resize */
+    /* Bruk textarea for alle celler med auto-resize */
     textarea {
       width: 100%;
       min-height: 40px;
@@ -59,7 +59,7 @@
       padding: 10px;
       font-size: 16px;
     }
-    /* Indikator for rad/kolonne */
+    /* Indikator for rad og kolonne */
     #indikator {
       position: fixed;
       top: 20px;
@@ -78,30 +78,62 @@
     <table id="myTable">
       <thead>
         <tr>
-          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea></th>
-          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea></th>
-          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea></th>
-          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea></th>
+          <th>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea>
+          </th>
+          <th>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea>
+          </th>
+          <th>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea>
+          </th>
+          <th>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
         </tr>
         <tr>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
         </tr>
         <tr>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -125,13 +157,13 @@
   </div>
 
   <script>
-    // Funksjon for automatisk å endre høyden på textarea basert på innhold
+    // Auto-resize for textarea
     function autoResize(textarea) {
       textarea.style.height = "auto";
       textarea.style.height = textarea.scrollHeight + "px";
     }
 
-    // Viser indikator med rad- og kolonneinformasjon når du holder musen over en celle
+    // Viser indikator med rad- og kolonneinformasjon når musen er over en celle
     function visIndikator(event) {
       var cell = event.target.closest("td");
       if (!cell) return;
@@ -143,7 +175,12 @@
       indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1);
     }
 
-    // Legg til ny rad i tbody og sett fokus på den nye radens første celle
+    // Skjul indikator når musen forlater tabellen
+    document.getElementById("myTable").addEventListener("mouseleave", function() {
+      document.getElementById("indikator").style.display = "none";
+    });
+
+    // Legg til ny rad i tbody og sett fokus på første celle i den nye raden
     function leggTilRad() {
       var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
       var cellCount = tbody.rows[0].cells.length;
@@ -179,7 +216,7 @@
       oppdaterKolonneValg();
     }
 
-    // Fjerner valgt rad basert på select-menyen
+    // Fjern valgt rad basert på select-menyen
     function fjernValgtRad() {
       var radSelect = document.getElementById("radValg");
       var index = radSelect.value;
@@ -190,7 +227,7 @@
       }
     }
 
-    // Fjerner valgt kolonne basert på select-menyen
+    // Fjern valgt kolonne basert på select-menyen
     function fjernValgtKolonne() {
       var kolonneSelect = document.getElementById("kolonneValg");
       var index = kolonneSelect.value;
@@ -236,9 +273,9 @@
       }
     }
 
-    // For header-celler lar vi Enter og Tab ha standardatferd (slik at du kan redigere overskriftene)
+    // For header-celler lar vi Enter og Tab ha standardatferd
     function handleHeaderKeyDown(event) {
-      // Her kan du legge til eventuelle spesielle regler for headeren om ønskelig
+      // Eventuelle spesielle regler for headeren kan legges her
     }
 
     // Oppdater select-menyene ved oppstart
