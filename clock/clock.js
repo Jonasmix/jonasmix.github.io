@@ -1,9 +1,15 @@
-function addRow() {
-    let table = document.getElementById("editableTable").getElementsByTagName('tbody')[0];
-    let newRow = table.insertRow();
-    let columns = table.rows[0].cells.length;
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("td").forEach(cell => {
+        cell.addEventListener("click", selectCell);
+    });
+});
 
-    for (let i = 0; i < columns; i++) {
+function addRow() {
+    let table = document.getElementById("editableTable").getElementsByTagName("tbody")[0];
+    let newRow = table.insertRow();
+    let colCount = table.rows[0]?.cells.length || 2; // Fallback hvis tom tabell
+
+    for (let i = 0; i < colCount; i++) {
         let cell = newRow.insertCell();
         cell.contentEditable = "true";
         cell.addEventListener("click", selectCell);
@@ -11,7 +17,11 @@ function addRow() {
 }
 
 function addColumn() {
-    let table = document.getElementById("editableTable").getElementsByTagName('tbody')[0];
+    let table = document.getElementById("editableTable").getElementsByTagName("tbody")[0];
+
+    if (table.rows.length === 0) {
+        addRow(); // Sørger for minst én rad
+    }
 
     for (let row of table.rows) {
         let cell = row.insertCell();
@@ -32,8 +42,3 @@ function changeCellColor() {
         selectedCell.style.backgroundColor = colorPicker.value;
     }
 }
-
-// Legger til klikkhendelse på eksisterende celler
-document.querySelectorAll("td").forEach(cell => {
-    cell.addEventListener("click", selectCell);
-});
