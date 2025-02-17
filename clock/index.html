@@ -1,209 +1,207 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell med Rad- og Kolonneindikator</title>
-    <style>
-        table {
-            width: 60%;
-            border-collapse: collapse;
-            margin: 20px auto;
-        }
-        th, td {
-            border: 1px solid #333;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        input {
-            width: 90%;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-        /* Organiser knappene horisontalt i to etasjer */
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .button-container button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .button-container select {
-            margin: 5px;
-            font-size: 16px;
-        }
-
-        /* Indikatorstil for rad og kolonne */
-        #indikator {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabell med Rad- og Kolonneindikator</title>
+  <style>
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input {
+      width: 90%;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    /* Organiser knappene horisontalt i to etasjer */
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .button-container button,
+    .button-container select {
+      margin: 5px;
+      font-size: 16px;
+      padding: 10px;
+    }
+    /* Indikatorstil for rad og kolonne */
+    #indikator {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-    <table id="myTable">
-        <thead>
-            <tr>
-                <th><input type="text" value="Tittel 1" class="editable-title"></th>
-                <th><input type="text" value="Tittel 2" class="editable-title"></th>
-                <th><input type="text" value="Tittel 3" class="editable-title"></th>
-                <th><input type="text" value="Tittel 4" class="editable-title"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
-            </tr>
-        </tbody>
-    </table>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th><input type="text" value="Tittel 1" class="editable-title"></th>
+        <th><input type="text" value="Tittel 2" class="editable-title"></th>
+        <th><input type="text" value="Tittel 3" class="editable-title"></th>
+        <th><input type="text" value="Tittel 4" class="editable-title"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+        <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+      </tr>
+    </tbody>
+  </table>
 
-    <div id="indikator"></div>
+  <div id="indikator"></div>
 
-    <div class="button-container">
-        <!-- Første rad med knapper -->
-        <button onclick="leggTilRad()">Legg til ny rad</button>
-        <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
-        <button onclick="fjernValgtRad()">Fjern valgt rad</button>
-        <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+  <div class="button-container">
+    <!-- Første rad med knapper -->
+    <button onclick="leggTilRad()">Legg til ny rad</button>
+    <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
+    <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+    <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
 
-        <!-- Andre rad med select-menyene -->
-        <select id="radValg" onchange="opprettRadValg()">
-            <option value="">Velg rad å fjerne</option>
-        </select>
-        <select id="kolonneValg" onchange="opprettKolonneValg()">
-            <option value="">Velg kolonne å fjerne</option>
-        </select>
-    </div>
+    <!-- Andre rad med select-menyene -->
+    <select id="radValg" onchange="opprettRadValg()">
+      <option value="">Velg rad å fjerne</option>
+    </select>
+    <select id="kolonneValg" onchange="opprettKolonneValg()">
+      <option value="">Velg kolonne å fjerne</option>
+    </select>
+  </div>
 
-    <script>
-        function visIndikator(event) {
-            var celle = event.target;
-            var radIndex = celle.closest('tr').rowIndex;  // Finn radindeks
-            var colIndex = celle.cellIndex;  // Finn kolonneindeks
+  <script>
+    function visIndikator(event) {
+      // Finn nærmeste td (dersom du holder musen over input, må vi gå opp til td)
+      var cell = event.target.closest("td");
+      if (!cell) return;
+      // Finn raden som inneholder cellen
+      var row = cell.closest("tr");
+      // Bruk rowIndex og cellIndex (merk: rowIndex kan inkludere header, men det var slik det fungerte tidligere)
+      var radIndex = row.rowIndex;       // 0-basert
+      var colIndex = cell.cellIndex;     // 0-basert
 
-            // Få tak i indikator-elementet
-            var indikator = document.getElementById("indikator");
+      var indikator = document.getElementById("indikator");
+      indikator.style.display = "block";
+      // Vi legger til 1 for å vise rad/kolonne på en mer naturlig måte
+      indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1);
+    }
 
-            // Oppdater innholdet og vis indikator
-            indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + (radIndex) + ", Kolonne: " + (colIndex); // 0-basert
+    function leggTilRad() {
+      var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+      var newRow = tableBody.insertRow();
+      // Bruk antall celler fra første rad i tbody (forutsatt at det alltid er samme antall)
+      var cellCount = tableBody.rows[0].cells.length;
+      for (var i = 0; i < cellCount; i++) {
+        var newCell = newRow.insertCell();
+        var input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Skriv her";
+        // Legg til onmouseover for den nye inputen
+        input.onmouseover = visIndikator;
+        newCell.appendChild(input);
+      }
+      oppdaterRadValg();
+    }
+
+    function leggTilKolonne() {
+      var table = document.getElementById("myTable");
+      var rows = table.rows;
+      for (var i = 0; i < rows.length; i++) {
+        var newCell = rows[i].insertCell();
+        var input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Skriv her";
+        input.onmouseover = visIndikator;
+        newCell.appendChild(input);
+        // Hvis det er header-raden, sett bakgrunnsfarge lik header
+        if (i === 0) {
+          newCell.style.backgroundColor = "#f2f2f2";
         }
+      }
+      oppdaterKolonneValg();
+    }
 
-        function leggTilRad() {
-            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
-            var newRow = table.insertRow(table.rows.length);
-            
-            for (var i = 0; i < table.rows[0].cells.length; i++) {
-                var newCell = newRow.insertCell(i);
-                var input = document.createElement("input");
-                input.type = "text";
-                input.placeholder = "Skriv her";
-                newCell.appendChild(input);
-            }
-
-            oppdaterRadValg();
-        }
-
-        function leggTilKolonne() {
-            var table = document.getElementById("myTable");
-            var rows = table.rows;
-            
-            for (var i = 0; i < rows.length; i++) {
-                var newCell = rows[i].insertCell(rows[i].cells.length);
-                var input = document.createElement("input");
-                input.type = "text";
-                input.placeholder = "Skriv her";
-                newCell.appendChild(input);
-
-                // Set background color to match header row
-                if (i === 0) {
-                    newCell.style.backgroundColor = '#f2f2f2'; // Same as the header row
-                }
-            }
-
-            oppdaterKolonneValg();
-        }
-
-        function fjernValgtRad() {
-            var radValg = document.getElementById("radValg").value;
-            if (radValg) {
-                var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
-                table.deleteRow(radValg);
-                oppdaterRadValg();
-            }
-        }
-
-        function fjernValgtKolonne() {
-            var kolonneValg = document.getElementById("kolonneValg").value;
-            if (kolonneValg) {
-                var table = document.getElementById("myTable");
-                for (var i = 0; i < table.rows.length; i++) {
-                    table.rows[i].deleteCell(kolonneValg);
-                }
-                oppdaterKolonneValg();
-            }
-        }
-
-        function oppdaterRadValg() {
-            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
-            var radSelect = document.getElementById("radValg");
-            radSelect.innerHTML = '<option value="">Velg rad å fjerne</option>';
-            for (var i = 0; i < table.rows.length; i++) {
-                var option = document.createElement("option");
-                option.value = i;
-                option.text = "Rad " + (i + 1);
-                radSelect.appendChild(option);
-            }
-        }
-
-        function oppdaterKolonneValg() {
-            var table = document.getElementById("myTable");
-            var kolonneSelect = document.getElementById("kolonneValg");
-            kolonneSelect.innerHTML = '<option value="">Velg kolonne å fjerne</option>';
-            var columns = table.rows[0].cells.length;
-            for (var i = 0; i < columns; i++) {
-                var option = document.createElement("option");
-                option.value = i;
-                option.text = "Kolonne " + (i + 1);
-                kolonneSelect.appendChild(option);
-            }
-        }
-
-        // Initialiser valgene for rad og kolonne ved oppstart
+    function fjernValgtRad() {
+      var radValg = document.getElementById("radValg").value;
+      if (radValg !== "") {
+        var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+        tableBody.deleteRow(radValg);
         oppdaterRadValg();
+      }
+    }
+
+    function fjernValgtKolonne() {
+      var kolonneValg = document.getElementById("kolonneValg").value;
+      if (kolonneValg !== "") {
+        var table = document.getElementById("myTable");
+        for (var i = 0; i < table.rows.length; i++) {
+          table.rows[i].deleteCell(kolonneValg);
+        }
         oppdaterKolonneValg();
-    </script>
+      }
+    }
+
+    function oppdaterRadValg() {
+      var tableBody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+      var radSelect = document.getElementById("radValg");
+      radSelect.innerHTML = '<option value="">Velg rad å fjerne</option>';
+      for (var i = 0; i < tableBody.rows.length; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.text = "Rad " + (i + 1);
+        radSelect.appendChild(option);
+      }
+    }
+
+    function oppdaterKolonneValg() {
+      var table = document.getElementById("myTable");
+      var kolonneSelect = document.getElementById("kolonneValg");
+      kolonneSelect.innerHTML = '<option value="">Velg kolonne å fjerne</option>';
+      var columns = table.rows[0].cells.length;
+      for (var i = 0; i < columns; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.text = "Kolonne " + (i + 1);
+        kolonneSelect.appendChild(option);
+      }
+    }
+
+    // Oppdater valgmenyer ved oppstart
+    oppdaterRadValg();
+    oppdaterKolonneValg();
+  </script>
 
 </body>
 </html>
