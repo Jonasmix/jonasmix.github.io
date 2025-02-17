@@ -24,21 +24,21 @@
             text-align: center;
             border: 1px solid #ccc;
         }
-        /* Organiser knappene under tabellen */
+        /* Organiser knappene horisontalt i to etasjer */
         .button-container {
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
         }
-        button {
-            display: block;
-            margin: 10px auto;
+        .button-container button {
+            margin: 5px;
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
         }
-        select {
-            margin: 10px auto;
-            display: block;
+        .button-container select {
+            margin: 5px;
             font-size: 16px;
         }
 
@@ -91,10 +91,13 @@
     <div id="indikator"></div>
 
     <div class="button-container">
+        <!-- Første rad med knapper -->
         <button onclick="leggTilRad()">Legg til ny rad</button>
         <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
         <button onclick="fjernValgtRad()">Fjern valgt rad</button>
         <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+
+        <!-- Andre rad med select-menyene -->
         <select id="radValg" onchange="opprettRadValg()">
             <option value="">Velg rad å fjerne</option>
         </select>
