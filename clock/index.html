@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program</title>
+  <title>Responsiv Tabell med Ekstra Kolonne</title>
   <style>
     /* Grunnleggende reset */
     * {
@@ -20,7 +20,7 @@
       margin: 0 auto;
       padding: 10px;
     }
-    /* Tabellen fyller bredden, men overskrider ikke enhetens størrelse */
+    /* Tabellen fyller bredden */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -35,7 +35,11 @@
     th {
       background-color: #f2f2f2;
     }
-    /* Bruk textarea for alle celler med auto-resize */
+    /* Sett bredden på den første kolonnen til ca. 5 tegn */
+    table th:first-child, table td:first-child {
+      width: 5ch;
+    }
+    /* Bruk textarea for celler slik at de auto-resizer */
     textarea {
       width: 100%;
       min-height: 40px;
@@ -47,7 +51,7 @@
       word-break: break-all;
       overflow: hidden;
     }
-    /* Knappene organiseres i to horisontale rader */
+    /* Organiser knappene i to rader */
     .button-container {
       display: flex;
       flex-wrap: wrap;
@@ -79,16 +83,20 @@
       <thead>
         <tr>
           <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tid</textarea>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea>
           </th>
           <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Hva?</textarea>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea>
           </th>
           <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Lys</textarea>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea>
           </th>
           <th>
-            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Annen Kommentar</textarea>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea>
+          </th>
+          <!-- Ekstra standard kolonne -->
+          <th>
+            <textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 5</textarea>
           </th>
         </tr>
       </thead>
@@ -106,7 +114,12 @@
           <td>
             <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
           </td>
+          <!-- Ekstra kolonne i hver rad -->
+          <td>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+          </td>
         </tr>
+        <!-- Gjenta for så mange rader du ønsker -->
         <tr>
           <td>
             <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
@@ -120,21 +133,11 @@
           <td>
             <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
           </td>
-        </tr>
-        <tr>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
-          <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
-          </td>
           <td>
             <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
           </td>
         </tr>
+        <!-- Du kan legge til flere rader her -->
       </tbody>
     </table>
 
@@ -180,7 +183,7 @@
       document.getElementById("indikator").style.display = "none";
     });
 
-    // Legg til ny rad i tbody og sett fokus på første celle i den nye raden
+    // Legg til ny rad i tbody og sett fokus på den nye radens første celle
     function leggTilRad() {
       var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
       var cellCount = tbody.rows[0].cells.length;
@@ -275,7 +278,7 @@
 
     // For header-celler lar vi Enter og Tab ha standardatferd
     function handleHeaderKeyDown(event) {
-      // Eventuelle spesielle regler for headeren kan legges her
+      // Eventuelle regler for header kan legges her
     }
 
     // Oppdater select-menyene ved oppstart
