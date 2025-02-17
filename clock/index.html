@@ -98,15 +98,17 @@
     </select>
 
     <script>
-        let valgtRad = -1;
-        let valgtKolonne = -1;
-
         function visIndikator(celle) {
-            var radIndex = celle.parentElement.rowIndex - 1;  // -1 fordi headeren er på rad 0
+            // Beregn rad- og kolonneindekser
+            var radIndex = celle.parentElement.rowIndex;
             var kolonneIndex = celle.cellIndex;
+
+            // Få tak i indikator-elementet
             var indikator = document.getElementById("indikator");
+
+            // Oppdater innholdet og vis indikator
             indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (kolonneIndex + 1);
+            indikator.innerHTML = "Rad: " + radIndex + ", Kolonne: " + (kolonneIndex + 1);
         }
 
         function leggTilRad() {
