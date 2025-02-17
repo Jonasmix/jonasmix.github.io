@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell med Redigerbare Titler og Funksjoner</title>
+    <title>Tabell med Rad- og Kolonneindikator</title>
     <style>
         table {
             width: 60%;
@@ -36,6 +36,18 @@
             display: block;
             font-size: 16px;
         }
+
+        /* Indikatorstil for rad og kolonne */
+        #indikator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -51,31 +63,32 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
             </tr>
         </tbody>
     </table>
+
+    <div id="indikator"></div>
 
     <button onclick="leggTilRad()">Legg til ny rad</button>
     <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
     <button onclick="fjernValgtRad()">Fjern valgt rad</button>
     <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
-    <button onclick="visValgtCelle()">Vis valgt rad og kolonne</button>
 
     <select id="radValg" onchange="opprettRadValg()">
         <option value="">Velg rad å fjerne</option>
@@ -84,11 +97,17 @@
         <option value="">Velg kolonne å fjerne</option>
     </select>
 
-    <p id="valgtInfo"></p>
-
     <script>
         let valgtRad = -1;
         let valgtKolonne = -1;
+
+        function visIndikator(celle) {
+            var radIndex = celle.parentElement.rowIndex - 1;  // -1 fordi headeren er på rad 0
+            var kolonneIndex = celle.cellIndex;
+            var indikator = document.getElementById("indikator");
+            indikator.style.display = "block";
+            indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (kolonneIndex + 1);
+        }
 
         function leggTilRad() {
             var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
@@ -142,22 +161,6 @@
                     table.rows[i].deleteCell(kolonneValg);
                 }
                 oppdaterKolonneValg();
-            }
-        }
-
-        function visValg(celle) {
-            var radIndex = celle.parentElement.rowIndex - 1;  // -1 because of header
-            var kolonneIndex = celle.cellIndex;
-            valgtRad = radIndex;
-            valgtKolonne = kolonneIndex;
-            document.getElementById("valgtInfo").innerText = "Du har valgt Rad: " + (radIndex + 1) + ", Kolonne: " + (kolonneIndex + 1);
-        }
-
-        function visValgtCelle() {
-            if (valgtRad >= 0 && valgtKolonne >= 0) {
-                alert("Du ser på Rad: " + (valgtRad + 1) + ", Kolonne: " + (valgtKolonne + 1));
-            } else {
-                alert("Vennligst velg en celle først.");
             }
         }
 
