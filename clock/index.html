@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Test</h1>
+    <h1>Interaktiv Tabell</h1>
     <button onclick="addRow()">Legg til rad</button>
     <button onclick="addColumn()">Legg til kolonne</button>
     <input type="color" id="colorPicker" onchange="changeCellColor()" />
+    
     <table id="editableTable">
-        <tbody>
+        <tbody id="tableBody">
             <tr>
-                <td contenteditable="true"></td>
+                <td contenteditable="true" onclick="selectCell(event)"></td>
             </tr>
         </tbody>
     </table>
+
     <script src="script.js"></script>
 </body>
 </html>
