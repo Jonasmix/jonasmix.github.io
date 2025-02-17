@@ -68,22 +68,22 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
+                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(event)"></td>
             </tr>
         </tbody>
     </table>
@@ -107,8 +107,8 @@
     </div>
 
     <script>
-        function visIndikator(celle) {
-            // Få rad- og kolonneindeksene for cellen
+        function visIndikator(event) {
+            var celle = event.target;
             var radIndex = celle.parentNode.rowIndex;  // Radindeks for cellen
             var colIndex = celle.cellIndex;  // Kolonneindeks for cellen
 
@@ -117,7 +117,7 @@
 
             // Oppdater innholdet og vis indikator
             indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + (radIndex) + ", Kolonne: " + (colIndex); // Vist uten +1
+            indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1); // Vist med +1 for å vise 1-basert
         }
 
         function leggTilRad() {
