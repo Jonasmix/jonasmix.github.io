@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell 4x3 med Input-felt</title>
+    <title>Tabell med Input og Legg til Rader</title>
     <style>
         table {
             width: 60%;
@@ -24,11 +24,18 @@
             text-align: center;
             border: 1px solid #ccc;
         }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <table>
+    <table id="myTable">
         <thead>
             <tr>
                 <th>Tittel 1</th>
@@ -58,6 +65,23 @@
             </tr>
         </tbody>
     </table>
+
+    <button onclick="leggTilRad()">Legg til ny rad</button>
+
+    <script>
+        function leggTilRad() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+
+            for (var i = 0; i < 4; i++) {
+                var newCell = newRow.insertCell(i);
+                var input = document.createElement("input");
+                input.type = "text";
+                input.placeholder = "Skriv her";
+                newCell.appendChild(input);
+            }
+        }
+    </script>
 
 </body>
 </html>
