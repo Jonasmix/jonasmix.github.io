@@ -220,6 +220,11 @@
         // Sett fokus til neste celle
         if (nextCell) {
           nextCell.querySelector("textarea").focus();
+        } else {
+          // Hvis vi er på slutten av tabellen, legg til ny rad
+          leggTilRad();
+          var newRow = currentCell.closest("tr").nextElementSibling;
+          newRow.cells[0].querySelector("textarea").focus();
         }
       }
     }
