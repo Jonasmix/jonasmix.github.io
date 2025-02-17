@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program</title>
+    <title>Tabell med Rad- og Kolonneindikator</title>
     <style>
         table {
             width: 60%;
@@ -23,6 +23,11 @@
             padding: 5px;
             text-align: center;
             border: 1px solid #ccc;
+        }
+        /* Organiser knappene under tabellen */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
         }
         button {
             display: block;
@@ -63,45 +68,46 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
-                <td><input type="text" placeholder="Skriv her" onmouseover="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visIndikator(this)"></td>
             </tr>
         </tbody>
     </table>
 
     <div id="indikator"></div>
 
-    <button onclick="leggTilRad()">Legg til ny rad</button>
-    <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
-    <button onclick="fjernValgtRad()">Fjern valgt rad</button>
-    <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
-
-    <select id="radValg" onchange="opprettRadValg()">
-        <option value="">Velg rad å fjerne</option>
-    </select>
-    <select id="kolonneValg" onchange="opprettKolonneValg()">
-        <option value="">Velg kolonne å fjerne</option>
-    </select>
+    <div class="button-container">
+        <button onclick="leggTilRad()">Legg til ny rad</button>
+        <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
+        <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+        <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+        <select id="radValg" onchange="opprettRadValg()">
+            <option value="">Velg rad å fjerne</option>
+        </select>
+        <select id="kolonneValg" onchange="opprettKolonneValg()">
+            <option value="">Velg kolonne å fjerne</option>
+        </select>
+    </div>
 
     <script>
         function visIndikator(celle) {
             // Beregn rad- og kolonneindekser
-            var radIndex = celle.parentElement.rowIndex;
-            var kolonneIndex = celle.cellIndex;
+            var radIndex = celle.parentElement.rowIndex; // Få radindeks fra rowIndex
+            var kolonneIndex = celle.cellIndex; // Få kolonneindeks fra cellIndex
 
             // Få tak i indikator-elementet
             var indikator = document.getElementById("indikator");
