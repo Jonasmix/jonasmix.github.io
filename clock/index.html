@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsiv Tabell med Dynamiske Funksjoner</title>
+  <title>Responsiv Tabell med Auto-Resize Celler</title>
   <style>
     /* Grunnleggende reset */
     * {
@@ -30,22 +30,22 @@
       border: 1px solid #333;
       padding: 8px;
       text-align: center;
+      vertical-align: top;
     }
     th {
       background-color: #f2f2f2;
     }
-    /* Bruk textarea for alle celler slik at du kan ha linjeskift (Enter) og tabulatorstyring */
+    /* Bruk textarea for alle celler slik at de kan auto-resize */
     textarea {
       width: 100%;
-      /* Sett en fast høyde – du kan endre dette etter ønske */
-      height: 40px;
+      min-height: 40px;
       resize: none;
       font-size: 14px;
       font-family: inherit;
       padding: 4px;
-      /* Sørger for at lange ord brytes, også uten mellomrom */
       white-space: pre-wrap;
       word-break: break-all;
+      overflow: hidden;
     }
     /* Knappene organiseres i to horisontale rader */
     .button-container {
@@ -78,30 +78,30 @@
     <table id="myTable">
       <thead>
         <tr>
-          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea></th>
-          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea></th>
-          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea></th>
-          <th><textarea onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea></th>
+          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 1</textarea></th>
+          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 2</textarea></th>
+          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 3</textarea></th>
+          <th><textarea oninput="autoResize(this)" onkeydown="handleHeaderKeyDown(event)">Tittel 4</textarea></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
         </tr>
         <tr>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
         </tr>
         <tr>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
-          <td><textarea placeholder="Skriv her" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
+          <td><textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea></td>
         </tr>
       </tbody>
     </table>
@@ -109,7 +109,7 @@
     <!-- Indikator for rad og kolonne -->
     <div id="indikator"></div>
 
-    <!-- Knappene, organisert i to rader (her med to select-elementer for å velge rad/kolonne til fjerning) -->
+    <!-- Knappene, organisert i to rader -->
     <div class="button-container">
       <button onclick="leggTilRad()">Legg til ny rad (Tab)</button>
       <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
@@ -125,6 +125,12 @@
   </div>
 
   <script>
+    // Funksjon for automatisk å endre høyden på textarea basert på innhold
+    function autoResize(textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+
     // Viser indikator med rad- og kolonneinformasjon når du holder musen over en celle
     function visIndikator(event) {
       var cell = event.target.closest("td");
@@ -134,11 +140,10 @@
       var colIndex = cell.cellIndex; // 0-basert
       var indikator = document.getElementById("indikator");
       indikator.style.display = "block";
-      // Legger til 1 for visning (brukervennlig 1-basert nummerering)
       indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1);
     }
 
-    // Legg til ny rad i tbody og sett fokus på første celle i den nye raden
+    // Legg til ny rad i tbody og sett fokus på den nye radens første celle
     function leggTilRad() {
       var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
       var cellCount = tbody.rows[0].cells.length;
@@ -147,6 +152,7 @@
         var newCell = newRow.insertCell();
         var textarea = document.createElement("textarea");
         textarea.placeholder = "Skriv her";
+        textarea.oninput = function() { autoResize(this); };
         textarea.onmouseover = visIndikator;
         textarea.onkeydown = handleTab;
         newCell.appendChild(textarea);
@@ -162,6 +168,7 @@
         var newCell = table.rows[i].insertCell();
         var textarea = document.createElement("textarea");
         textarea.placeholder = "Skriv her";
+        textarea.oninput = function() { autoResize(this); };
         textarea.onmouseover = visIndikator;
         textarea.onkeydown = handleTab;
         newCell.appendChild(textarea);
