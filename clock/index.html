@@ -108,16 +108,19 @@
 
     <script>
         function visIndikator(celle) {
-            // Beregn rad- og kolonneindekser
-            var rowIndex = celle.parentNode.parentNode.rowIndex; // Få radindeks fra rowIndex på row i tbody
-            var colIndex = celle.cellIndex; // Få kolonneindeks fra cellIndex
-
+            // Få tak i tabellen
+            var table = document.getElementById("myTable");
+            
+            // Hent rad- og kolonneindeksene på riktig måte
+            var radIndex = celle.parentElement.rowIndex; // Rad indeksen til cellen
+            var colIndex = celle.cellIndex; // Kolonneindeks til cellen
+            
             // Få tak i indikator-elementet
             var indikator = document.getElementById("indikator");
 
             // Oppdater innholdet og vis indikator
             indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + rowIndex + ", Kolonne: " + (colIndex + 1);
+            indikator.innerHTML = "Rad: " + radIndex + ", Kolonne: " + (colIndex + 1);
         }
 
         function leggTilRad() {
