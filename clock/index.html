@@ -112,15 +112,15 @@
             var table = document.getElementById("myTable");
             
             // Hent rad- og kolonneindeksene på riktig måte
-            var radIndex = celle.parentElement.rowIndex; // Rad indeksen til cellen
-            var colIndex = celle.cellIndex; // Kolonneindeks til cellen
+            var radIndex = celle.parentNode.rowIndex + 1; // Rad indeksen til cellen (starter fra 1 for visning)
+            var colIndex = celle.cellIndex + 1; // Kolonneindeks til cellen (starter fra 1 for visning)
             
             // Få tak i indikator-elementet
             var indikator = document.getElementById("indikator");
 
             // Oppdater innholdet og vis indikator
             indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + radIndex + ", Kolonne: " + (colIndex + 1);
+            indikator.innerHTML = "Rad: " + radIndex + ", Kolonne: " + colIndex;
         }
 
         function leggTilRad() {
