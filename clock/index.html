@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program med Rad- og Kolonneindikator</title>
+    <title>Tabell med Rad- og Kolonneindikator</title>
     <style>
         table {
             width: 60%;
@@ -108,16 +108,16 @@
 
     <script>
         function visIndikator(celle) {
-            // Hent rad- og kolonneindeksene på riktig måte (bruk rowIndex og cellIndex direkte)
-            var radIndex = celle.parentNode.rowIndex; // Radindeks for cellen (starter fra 0)
-            var colIndex = celle.cellIndex; // Kolonneindeks for cellen (starter fra 0)
+            // Få rad- og kolonneindeksene for cellen
+            var radIndex = celle.parentNode.rowIndex;  // Radindeks for cellen
+            var colIndex = celle.cellIndex;  // Kolonneindeks for cellen
 
             // Få tak i indikator-elementet
             var indikator = document.getElementById("indikator");
 
             // Oppdater innholdet og vis indikator
             indikator.style.display = "block";
-            indikator.innerHTML = "Rad: " + (radIndex + 1) + ", Kolonne: " + (colIndex + 1); // Legg til 1 for visning
+            indikator.innerHTML = "Rad: " + (radIndex) + ", Kolonne: " + (colIndex); // Vist uten +1
         }
 
         function leggTilRad() {
