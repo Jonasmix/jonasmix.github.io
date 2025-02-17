@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabell med Redigerbare Titler</title>
+    <title>Tabell med Redigerbare Titler og Funksjoner</title>
     <style>
         table {
             width: 60%;
@@ -51,22 +51,22 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
             </tr>
             <tr>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
-                <td><input type="text" placeholder="Skriv her"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
+                <td><input type="text" placeholder="Skriv her" onclick="visValg(this)"></td>
             </tr>
         </tbody>
     </table>
@@ -75,6 +75,7 @@
     <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
     <button onclick="fjernValgtRad()">Fjern valgt rad</button>
     <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+    <button onclick="visValgtCelle()">Vis valgt rad og kolonne</button>
 
     <select id="radValg" onchange="opprettRadValg()">
         <option value="">Velg rad å fjerne</option>
@@ -83,7 +84,12 @@
         <option value="">Velg kolonne å fjerne</option>
     </select>
 
+    <p id="valgtInfo"></p>
+
     <script>
+        let valgtRad = -1;
+        let valgtKolonne = -1;
+
         function leggTilRad() {
             var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.rows.length);
@@ -109,6 +115,11 @@
                 input.type = "text";
                 input.placeholder = "Skriv her";
                 newCell.appendChild(input);
+
+                // Set background color to match header row
+                if (i === 0) {
+                    newCell.style.backgroundColor = '#f2f2f2'; // Same as the header row
+                }
             }
 
             oppdaterKolonneValg();
@@ -131,6 +142,22 @@
                     table.rows[i].deleteCell(kolonneValg);
                 }
                 oppdaterKolonneValg();
+            }
+        }
+
+        function visValg(celle) {
+            var radIndex = celle.parentElement.rowIndex - 1;  // -1 because of header
+            var kolonneIndex = celle.cellIndex;
+            valgtRad = radIndex;
+            valgtKolonne = kolonneIndex;
+            document.getElementById("valgtInfo").innerText = "Du har valgt Rad: " + (radIndex + 1) + ", Kolonne: " + (kolonneIndex + 1);
+        }
+
+        function visValgtCelle() {
+            if (valgtRad >= 0 && valgtKolonne >= 0) {
+                alert("Du ser på Rad: " + (valgtRad + 1) + ", Kolonne: " + (valgtKolonne + 1));
+            } else {
+                alert("Vennligst velg en celle først.");
             }
         }
 
