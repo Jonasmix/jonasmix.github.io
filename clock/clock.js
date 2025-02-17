@@ -13,7 +13,7 @@ function addRow() {
     let table = document.getElementById("editableTable").getElementsByTagName("tbody")[0];
     let newRow = table.insertRow();
     
-    let colCount = table.rows[0] ? table.rows[0].cells.length : 2; // Standard 2 kolonner hvis tom
+    let colCount = table.rows[0] ? table.rows[0].cells.length : 1; // Standard 1 kolonne hvis tom
     
     for (let i = 0; i < colCount; i++) {
         let cell = newRow.insertCell();
