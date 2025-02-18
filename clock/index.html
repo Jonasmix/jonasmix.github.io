@@ -35,7 +35,7 @@
     }
     /* Første kolonne fet skrift */
     table th:first-child, table td:first-child {
-      width: 5ch;
+      width: 12ch;
       font-weight: bold;
     }
     textarea {
@@ -98,19 +98,19 @@
       <tbody>
         <tr>
           <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)" onfocus="setActiveCell(this)"></textarea>
           </td>
           <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)" onfocus="setActiveCell(this)"></textarea>
           </td>
           <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)" onfocus="setActiveCell(this)"></textarea>
           </td>
           <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)" onfocus="setActiveCell(this)"></textarea>
           </td>
           <td>
-            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)"></textarea>
+            <textarea placeholder="Skriv her" oninput="autoResize(this)" onmouseover="visIndikator(event)" onkeydown="handleTab(event)" onfocus="setActiveCell(this)"></textarea>
           </td>
         </tr>
       </tbody>
@@ -121,12 +121,26 @@
     <div class="button-container">
       <button onclick="leggTilRad()">Legg til ny rad (Tab)</button>
       <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
+      <select id="radSelect">
+        <option value="">Velg rad</option>
+      </select>
       <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+      <select id="kolonneSelect">
+        <option value="">Velg kolonne</option>
+      </select>
       <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+      <button onclick="leggTilRadUnderAktiv()">Legg til rad under</button>
+      <button onclick="leggTilKolonneTilHoyre()">Legg til kolonne til høyre</button>
     </div>
   </div>
 
   <script>
+    let activeCell = null;
+
+    function setActiveCell(textarea) {
+      activeCell = textarea.closest("td");
+    }
+
     function autoResize(textarea) {
       textarea.style.height = "auto";
       textarea.style.height = textarea.scrollHeight + "px";
@@ -158,8 +172,10 @@
         textarea.oninput = function() { autoResize(this); };
         textarea.onmouseover = visIndikator;
         textarea.onkeydown = handleTab;
+        textarea.onfocus = function() { setActiveCell(this); };
         newCell.appendChild(textarea);
       }
+      oppdaterRadDropdown();
     }
 
     function leggTilKolonne() {
@@ -171,25 +187,103 @@
         textarea.oninput = function() { autoResize(this); };
         textarea.onmouseover = visIndikator;
         textarea.onkeydown = handleTab;
+        textarea.onfocus = function() { setActiveCell(this); };
         newCell.appendChild(textarea);
         if (i === 0) {
           newCell.style.backgroundColor = "#f2f2f2";
         }
       }
+      oppdaterKolonneDropdown();
     }
 
     function fjernValgtRad() {
-      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
-      if (tbody.rows.length > 0) {
-        tbody.deleteRow(-1);
+      var radSelect = document.getElementById("radSelect");
+      var valgtRad = radSelect.value;
+      if (valgtRad) {
+        var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+        tbody.deleteRow(valgtRad - 1);
+        oppdaterRadDropdown();
       }
     }
 
     function fjernValgtKolonne() {
-      var table = document.getElementById("myTable");
-      if (table.rows[0].cells.length > 1) {
+      var kolonneSelect = document.getElementById("kolonneSelect");
+      var valgtKolonne = kolonneSelect.value;
+      if (valgtKolonne) {
+        var table = document.getElementById("myTable");
         for (var i = 0; i < table.rows.length; i++) {
-          table.rows[i].deleteCell(-1);
+          table.rows[i].deleteCell(valgtKolonne - 1);
+        }
+        oppdaterKolonneDropdown();
+      }
+    }
+
+    function leggTilRadUnderAktiv() {
+      if (!activeCell) return;
+
+      const row = activeCell.closest("tr");
+      const tbody = document.querySelector("#myTable tbody");
+      const rowIndexInTbody = Array.from(tbody.rows).indexOf(row);
+
+      const insertIndex = rowIndexInTbody >= 0 ? rowIndexInTbody + 1 : 0;
+      const newRow = tbody.insertRow(insertIndex);
+      const cellCount = tbody.rows[0].cells.length;
+
+      for (let i = 0; i < cellCount; i++) {
+        const newCell = newRow.insertCell();
+        const textarea = document.createElement("textarea");
+        textarea.placeholder = "Skriv her";
+        textarea.oninput = () => autoResize(textarea);
+        textarea.onmouseover = visIndikator;
+        textarea.onkeydown = handleTab;
+        textarea.onfocus = () => setActiveCell(textarea);
+        newCell.appendChild(textarea);
+      }
+      oppdaterRadDropdown();
+    }
+
+    function leggTilKolonneTilHoyre() {
+      if (!activeCell) return;
+      var colIndex = activeCell.cellIndex;
+      var table = document.getElementById("myTable");
+      for (var i = 0; i < table.rows.length; i++) {
+        var newCell = table.rows[i].insertCell(colIndex + 1);
+        var textarea = document.createElement("textarea");
+        textarea.placeholder = "Skriv her";
+        textarea.oninput = function() { autoResize(this); };
+        textarea.onmouseover = visIndikator;
+        textarea.onkeydown = handleTab;
+        textarea.onfocus = function() { setActiveCell(this); };
+        newCell.appendChild(textarea);
+        if (i === 0) {
+          newCell.style.backgroundColor = "#f2f2f2";
+        }
+      }
+      oppdaterKolonneDropdown();
+    }
+
+    function oppdaterRadDropdown() {
+      var radSelect = document.getElementById("radSelect");
+      radSelect.innerHTML = "<option value=''>Velg rad</option>";
+      var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+      for (var i = 0; i < tbody.rows.length; i++) {
+        var option = document.createElement("option");
+        option.value = i + 1;
+        option.text = "Rad " + (i + 1);
+        radSelect.appendChild(option);
+      }
+    }
+
+    function oppdaterKolonneDropdown() {
+      var kolonneSelect = document.getElementById("kolonneSelect");
+      kolonneSelect.innerHTML = "<option value=''>Velg kolonne</option>";
+      var table = document.getElementById("myTable");
+      if (table.rows.length > 0) {
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+          var option = document.createElement("option");
+          option.value = i + 1;
+          option.text = "Kolonne " + (i + 1);
+          kolonneSelect.appendChild(option);
         }
       }
     }
@@ -198,36 +292,36 @@
       var currentCell = event.target;
       var nextCell;
 
-      // Hvis Tab-tasten er trykket på
       if (event.key === "Tab") {
-        event.preventDefault();  // Hindre standard handling
+        event.preventDefault();
         if (event.shiftKey) {
-          // Shift+Tab går til forrige celle
           nextCell = currentCell.closest("td").previousElementSibling;
           if (!nextCell) {
             var prevRow = currentCell.closest("tr").previousElementSibling;
             if (prevRow) nextCell = prevRow.cells[prevRow.cells.length - 1];
           }
         } else {
-          // Vanlig Tab går til neste celle
           nextCell = currentCell.closest("td").nextElementSibling;
           if (!nextCell) {
             var nextRow = currentCell.closest("tr").nextElementSibling;
             if (nextRow) nextCell = nextRow.cells[0];
           }
         }
-        
-        // Sett fokus til neste celle
+
         if (nextCell) {
           nextCell.querySelector("textarea").focus();
         } else {
-          // Hvis vi er på slutten av tabellen, legg til ny rad
           leggTilRad();
           var newRow = currentCell.closest("tr").nextElementSibling;
           newRow.cells[0].querySelector("textarea").focus();
         }
       }
     }
+
+    window.onload = function() {
+      oppdaterRadDropdown();
+      oppdaterKolonneDropdown();
+    };
   </script>
 </body>
 </html>
