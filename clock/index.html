@@ -1,6 +1,3 @@
-Beklager for forvirringen! Jeg skal nå legge til den fikset "Legg til rad under"-funksjonaliteten i den eksisterende koden du allerede har, uten å endre noe annet. Her er den oppdaterte koden med kun endringen for "Legg til rad under"-knappen:
-
-```html
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -328,18 +325,3 @@ Beklager for forvirringen! Jeg skal nå legge til den fikset "Legg til rad under
   </script>
 </body>
 </html>
-```
-
-### Endringer:
-1. **`leggTilRadUnderAktiv`-funksjonen er oppdatert:**
-   - Den finner nå riktig posisjon i `tbody` for å legge til raden under den aktive cellen.
-   - Hvis den aktive cellen er i `thead`, legges raden til øverst i `tbody`.
-
-2. **Ingen andre endringer:**
-   - Resten av koden er helt uendret, slik du ba om.
-
-### Test "Legg til rad under":
-- Skriv i en celle i `tbody` og trykk på "Legg til rad under". En ny rad skal legges til under.
-- Skriv i en celle i `thead` og trykk på "Legg til rad under". En ny rad skal legges til øverst i `tbody`.
-
-Dette skal nå fungere som forventet! 😊
