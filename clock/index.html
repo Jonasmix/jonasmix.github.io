@@ -1,158 +1,172 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabell med valgbar sletting</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: sans-serif; padding: 10px; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 10px; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid #333; padding: 8px; text-align: center; vertical-align: top; }
-    
-    /* Fet skrift for tittel-rader og første kolonne */
-    thead textarea, table th:first-child, table td:first-child { font-weight: bold; }
-    
-    textarea {
-      width: 100%;
-      min-height: 40px;
-      resize: none;
-      font-size: 14px;
-      font-family: inherit;
-      padding: 4px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow: hidden;
-    }
-    
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .button-container > * { margin: 5px; padding: 10px; font-size: 16px; }
-
-    #indikator {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
-      z-index: 1000;
-    }
-
-    .selected { background-color: yellow !important; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamisk Tabell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        table {
+            width: 90%;
+            max-width: 1200px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            min-width: 100px;
+            word-break: break-word;
+        }
+        th {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+        .button-container {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        select, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
+
     <table id="myTable">
-      <thead>
-        <tr>
-          <th><textarea>Tittel 1</textarea></th>
-          <th><textarea>Tittel 2</textarea></th>
-          <th><textarea>Tittel 3</textarea></th>
-          <th><textarea>Tittel 4</textarea></th>
-          <th><textarea>Tittel 5</textarea></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><textarea onfocus="velgCelle(this)"></textarea></td>
-          <td><textarea onfocus="velgCelle(this)"></textarea></td>
-          <td><textarea onfocus="velgCelle(this)"></textarea></td>
-          <td><textarea onfocus="velgCelle(this)"></textarea></td>
-          <td><textarea onfocus="velgCelle(this)"></textarea></td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>Kolonne 1</th>
+                <th>Kolonne 2</th>
+                <th>Kolonne 3</th>
+                <th>Kolonne 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+        </tbody>
     </table>
 
-    <div id="indikator"></div>
-
     <div class="button-container">
-      <button onclick="leggTilRad()">Legg til ny rad</button>
-      <button onclick="leggTilKolonne()">Legg til ny kolonne</button>
-      <button onclick="fjernValgtRad()">Fjern valgt rad</button>
-      <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
+        <button onclick="leggTilRad()">Legg til rad</button>
+        <button onclick="leggTilKolonne()">Legg til kolonne</button>
+
+        <label for="radDropdown">Velg rad:</label>
+        <select id="radDropdown"></select>
+        <button onclick="fjernValgtRad()">Fjern valgt rad</button>
+
+        <label for="kolonneDropdown">Velg kolonne:</label>
+        <select id="kolonneDropdown"></select>
+        <button onclick="fjernValgtKolonne()">Fjern valgt kolonne</button>
     </div>
-  </div>
 
-  <script>
-    let valgtRad = null;
-    let valgtKolonne = null;
+    <script>
+        function oppdaterDropdowns() {
+            var radDropdown = document.getElementById("radDropdown");
+            var kolonneDropdown = document.getElementById("kolonneDropdown");
+            var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+            var antallRader = tbody.rows.length;
+            var antallKolonner = tbody.rows[0].cells.length;
 
-    function velgCelle(element) {
-      let celle = element.closest("td");
-      let rad = celle.parentElement;
-      let tabell = document.getElementById("myTable");
-      
-      // Fjern tidligere markeringer
-      tabell.querySelectorAll(".selected").forEach(c => c.classList.remove("selected"));
+            radDropdown.innerHTML = "";
+            kolonneDropdown.innerHTML = "";
 
-      valgtRad = rad.rowIndex;
-      valgtKolonne = celle.cellIndex;
-      
-      // Marker valgt rad og kolonne
-      rad.classList.add("selected");
-      tabell.querySelectorAll("tr").forEach(tr => {
-        if (tr.cells[valgtKolonne]) {
-          tr.cells[valgtKolonne].classList.add("selected");
+            for (var i = 0; i < antallRader; i++) {
+                var radOption = document.createElement("option");
+                radOption.value = i;
+                radOption.textContent = "Rad " + (i + 1);
+                radDropdown.appendChild(radOption);
+            }
+
+            for (var j = 0; j < antallKolonner; j++) {
+                var kolonneOption = document.createElement("option");
+                kolonneOption.value = j;
+                kolonneOption.textContent = "Kolonne " + (j + 1);
+                kolonneDropdown.appendChild(kolonneOption);
+            }
         }
-      });
-    }
 
-    function leggTilRad() {
-      let tbody = document.querySelector("#myTable tbody");
-      let antallKolonner = tbody.rows[0].cells.length;
-      let nyRad = tbody.insertRow();
-      
-      for (let i = 0; i < antallKolonner; i++) {
-        let nyCelle = nyRad.insertCell();
-        let textarea = document.createElement("textarea");
-        textarea.onfocus = function() { velgCelle(this); };
-        nyCelle.appendChild(textarea);
-      }
-    }
+        function leggTilRad() {
+            var table = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow();
+            var kolonneAntall = document.getElementById("myTable").rows[0].cells.length;
 
-    function leggTilKolonne() {
-      let tabell = document.getElementById("myTable");
-      
-      for (let rad of tabell.rows) {
-        let nyCelle = rad.insertCell();
-        let textarea = document.createElement("textarea");
-        textarea.onfocus = function() { velgCelle(this); };
-        nyCelle.appendChild(textarea);
-        
-        if (rad.rowIndex === 0) {
-          nyCelle.style.backgroundColor = "#f2f2f2"; 
+            for (var i = 0; i < kolonneAntall; i++) {
+                var newCell = newRow.insertCell(i);
+                newCell.contentEditable = "true";
+            }
+            oppdaterDropdowns();
         }
-      }
-    }
 
-    function fjernValgtRad() {
-      if (valgtRad === null || valgtRad === 0) return; // Ikke fjern tittel-raden
-      
-      let tbody = document.querySelector("#myTable tbody");
-      tbody.deleteRow(valgtRad - 1);
-      valgtRad = null;
-    }
-
-    function fjernValgtKolonne() {
-      if (valgtKolonne === null) return;
-
-      let tabell = document.getElementById("myTable");
-      for (let rad of tabell.rows) {
-        if (rad.cells.length > 1) {
-          rad.deleteCell(valgtKolonne);
+        function leggTilKolonne() {
+            var table = document.getElementById("myTable");
+            for (var i = 0; i < table.rows.length; i++) {
+                var newCell = table.rows[i].insertCell();
+                newCell.contentEditable = "true";
+                if (i === 0) {
+                    newCell.style.backgroundColor = "lightgray";
+                    newCell.style.fontWeight = "bold";
+                    newCell.textContent = "Ny Kolonne";
+                }
+            }
+            oppdaterDropdowns();
         }
-      }
-      valgtKolonne = null;
-    }
-  </script>
+
+        function fjernValgtRad() {
+            var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+            var radDropdown = document.getElementById("radDropdown");
+            var valgtRad = radDropdown.value;
+
+            if (tbody.rows.length > 1 && valgtRad !== "") {
+                tbody.deleteRow(valgtRad);
+                oppdaterDropdowns();
+            }
+        }
+
+        function fjernValgtKolonne() {
+            var table = document.getElementById("myTable");
+            var kolonneDropdown = document.getElementById("kolonneDropdown");
+            var valgtKolonne = kolonneDropdown.value;
+
+            if (table.rows[0].cells.length > 1 && valgtKolonne !== "") {
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].deleteCell(valgtKolonne);
+                }
+                oppdaterDropdowns();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", oppdaterDropdowns);
+    </script>
+
 </body>
 </html>
